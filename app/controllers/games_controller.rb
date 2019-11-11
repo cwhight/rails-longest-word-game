@@ -15,7 +15,7 @@ class GamesController < ApplicationController
     @word = params[:answer]
     if check_word(@word) && check_grid(@word, letters)
       @result = "congratulations! #{@word} is a good word!"
-      session[:score] += @word.length
+      session.key?(:score) ? session[:score] += @word.length : session[:score] = @word.length
     elsif check_grid(@word, letters)
       @result = "Sorry but #{@word} does not seem to be a valid English word.."
     else
